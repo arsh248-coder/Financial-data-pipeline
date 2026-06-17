@@ -1,0 +1,23 @@
+-- Ensure we are using the highest level role
+USE ROLE ACCOUNTADMIN;
+
+-- 1. Create the database
+CREATE OR REPLACE DATABASE FINANCIAL_DATA;
+
+-- 2. Use the new database
+USE DATABASE FINANCIAL_DATA;
+
+-- 3. Create the schema within that database
+CREATE OR REPLACE SCHEMA FINANCIAL_DATA.RAW;
+
+-- 4. Create the table in that schema
+CREATE OR REPLACE TABLE FINANCIAL_DATA.RAW.STOCK_PRICES (
+    TICKER STRING,
+    DATE DATE,
+    OPEN FLOAT,
+    HIGH FLOAT,
+    LOW FLOAT,
+    CLOSE FLOAT,
+    VOLUME BIGINT,
+    INGESTED_AT TIMESTAMP_NTZ DEFAULT CURRENT_TIMESTAMP()
+);

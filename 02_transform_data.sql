@@ -1,0 +1,16 @@
+USE DATABASE FINANCIAL_DATA;
+
+-- Create a new schema for clean data
+CREATE OR REPLACE SCHEMA FINANCIAL_DATA.TRANSFORMED;
+
+-- Create a table that only holds the high-level summary
+CREATE OR REPLACE TABLE FINANCIAL_DATA.TRANSFORMED.MONTHLY_SUMMARY AS
+SELECT 
+    TICKER,
+    DATE_TRUNC('MONTH', DATE) as MONTH,
+    AVG(CLOSE) as AVG_CLOSE_PRICE,
+    MAX(HIGH) as PEAK_PRICE
+FROM FINANCIAL_DATA.RAW.STOCK_PRICES
+GROUP BY 1, 2;
+
+Select * from financial_data.transformed.monthly_summary;
